@@ -14,7 +14,7 @@
       "registration.php"
     ],
     "psr-4": {
-      "Commerce365\\CustomerPrice\\": ""
+      "Commerce365\\Core\\": ""
     }
   }
 }
