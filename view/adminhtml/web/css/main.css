@@ -1,0 +1,13 @@
+#commerce365-configuration-checkconnection-indicator {
+    margin-top: 5px;
+}
+
+#tab_block_c365_customer_attributes span:first-child:after {
+    background: url(../images/bc_logo.png) no-repeat;
+    width: 16px;
+    height: 16px;
+    content: '';
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: bottom;
+}

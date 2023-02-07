@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="Commerce365Config" translate="label" sortOrder="700">
+            <label>Commerce 365</label>
+        </tab>
+
+        <section id="commerce365config_general" translate="label" sortOrder="500" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>General</label>
+            <tab>Commerce365Config</tab>
+            <resource>Commerce365_Core::config</resource>
+            <group id="hub" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Commerce 365 Hub</label>
+                <field id="hub_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Base URL</label>
+                </field>
+                <field id="hub_appid" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>App ID</label>
+                </field>
+                <field id="hub_secretkey" translate="label" type="password" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Secret Key</label>
+                </field>
+                <field id="check_connection" translate="label comment" type="button" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Commerce365\Core\Block\Adminhtml\System\Config\Buttons\CheckConnection</frontend_model>
+                    <label><![CDATA[Test]]></label>
+                    <comment><![CDATA[Use this button to check the URL and credentials you have entered. Do not forget to save the configuration after a successful testing the connection.]]></comment>
+                </field>
+            </group>
+            <group id="sales_documents" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="1">
+                <label>Sales Documents</label>
+                <field id="b2b_offlineorders" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Show Non-Web Orders</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="b2b_offlineinvoices" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Show Non-Web Invoices</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="b2b_offlineshipments" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Show Non-Web Shipments</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="logging" translate="label" type="text" sortOrder="30" showInDefault="0" showInWebsite="0" showInStore="0">
+                <label>Logging</label>
+                <field id="log_level" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Log Level</label>
+                    <source_model>Commerce365\Core\Model\Config\Source\LogLevel</source_model>
+                </field>
+                <field id="test_logging" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Commerce365\Core\Block\Adminhtml\System\Config\Buttons\TestLogging</frontend_model>
+                    <label><![CDATA[Test]]></label>
+                    <comment><![CDATA[Use this button to check if the logging mechanism is working correctly.]]></comment>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>
