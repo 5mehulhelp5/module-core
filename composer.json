@@ -3,7 +3,6 @@
     "version": "1.0.0",
     "description": "N/A",
     "type": "magento2-module",
-    "minimum-stability": "stable",
     "require": {
         "magento/framework": "*"
     },
