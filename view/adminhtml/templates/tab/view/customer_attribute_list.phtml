@@ -25,6 +25,10 @@ $allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub
             <td><?= $block->escapeHtml($block->getBcCustomerNo()) ?></td>
         </tr>
         <tr>
+            <th><?= $block->escapeHtml(__('Contact No:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcContactNo()) ?></td>
+        </tr>
+        <tr>
             <th><?= $block->escapeHtml(__('Customer Name:')) ?></th>
             <td><?= $block->escapeHtml($block->getBcCustomerName()) ?></td>
         </tr>
