@@ -41,6 +41,8 @@ class InstallData implements InstallDataInterface
     {
         $eavSetup = $this->eavSetupFactory->create(['setup' => $setup]);
         $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'bc_customer_no');
+        $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'bc_contact_no');
+        $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'parent_customer_id');
         $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'bc_company_name');
         $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'bc_customer_price_group');
         $eavSetup->removeAttribute(\Magento\Customer\Model\Customer::ENTITY, 'bc_customer_discount_group');
