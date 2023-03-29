@@ -1,6 +1,6 @@
 {
     "name": "commerce365/module-core",
-    "version": "2.1.8",
+    "version": "1.0.1",
     "description": "N/A",
     "type": "magento2-module",
     "require": {
