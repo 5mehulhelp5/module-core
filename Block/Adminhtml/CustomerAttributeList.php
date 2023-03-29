@@ -48,6 +48,26 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
         return '';
     }
 
+    public function getBcContactNo()
+    {
+        $customer = $this->getCustomer();
+        if ($customer->getCustomAttribute('bc_contact_no')) {
+            return $customer->getCustomAttribute('bc_contact_no')->getValue();
+        }
+
+        return '';
+    }
+
+    public function getParentCustomerId()
+    {
+        $customer = $this->getCustomer();
+        if ($customer->getCustomAttribute('parent_customer_id')) {
+            return $customer->getCustomAttribute('parent_customer_id')->getValue();
+        }
+
+        return '';
+    }
+
     public function getBcCustomerName()
     {
         $customer = $this->getCustomer();

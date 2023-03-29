@@ -32,6 +32,8 @@ class UpgradeData implements UpgradeDataInterface
         $customerSetup = $this->customerSetupFactory->create(['setup' => $setup]);
 
         $this->CheckAndCreateCustomerAttribute($setup, 'bc_customer_no', 'BC Customer Number', 'varchar', 'text', 300, false, '', true);
+        $this->CheckAndCreateCustomerAttribute($setup, 'bc_contact_no', 'BC Contact Number', 'varchar', 'text', 300, false, '', true);
+        $this->CheckAndCreateCustomerAttribute($setup, 'parent_customer_id', 'Parent Customer ID for Contacts', 'varchar', 'text', 300, false, '', true);
         $this->CheckAndCreateCustomerAttribute($setup, 'bc_company_name', 'Company Name', 'varchar', 'text', 305, false);
         $this->CheckAndCreateCustomerAttribute($setup, 'bc_customer_price_group', 'Customer Price Group', 'varchar', 'text', 310, false);
         $this->CheckAndCreateCustomerAttribute($setup, 'bc_customer_discount_group', 'Customer Discount Group', 'varchar', 'text', 311, false);
@@ -57,6 +59,14 @@ class UpgradeData implements UpgradeDataInterface
                 'is_filterable_in_grid' => true,
                 'is_searchable_in_grid' => true
             ]);
+        $customerSetup->updateAttribute(\Magento\Customer\Model\Customer::ENTITY,'bc_contact_no',
+        [
+            'visible' => true,
+            'is_used_in_grid'       => true,
+            'is_visible_in_grid'    => true,
+            'is_filterable_in_grid' => true,
+            'is_searchable_in_grid' => true
+        ]);
     }
 
     private function CheckAndCreateCustomerAttribute(ModuleDataSetupInterface $setup, string $attributeCode, string $label, string $type, string $input, int $position = 500, bool $visible = false, string $source = '', bool $usedInGrid = false)
