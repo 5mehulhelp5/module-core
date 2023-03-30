@@ -1,7 +1,8 @@
 {
     "name": "commerce365/module-core",
     "version": "1.0.1",
-    "description": "N/A",
+    "description": "Core functionality used by all our Magento 2 extensions",
+    "homepage": "https://n.vision/products/commerce-365-for-magento/",
     "license": [
         "OSL-3.0"
     ],
