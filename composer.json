@@ -2,6 +2,9 @@
     "name": "commerce365/module-core",
     "version": "1.0.1",
     "description": "N/A",
+    "license": [
+        "OSL-3.0"
+    ],
     "type": "magento2-module",
     "require": {
         "magento/framework": "*"
