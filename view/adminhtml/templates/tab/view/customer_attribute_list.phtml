@@ -68,12 +68,18 @@ $allowedAddressHtmlTags = ['b', 'br', 'em', 'i', 'li', 'ol', 'p', 'strong', 'sub
             <th><?= $block->escapeHtml(__('Blocked Status:')) ?></th>
             <td><?= $block->escapeHtml($block->getBcCustomerBlocked()) ?></td>
         </tr>
-
-
-
-
-
-
+        <tr>
+            <th><?= $block->escapeHtml(__('Contact Number:')) ?></th>
+            <td><?= $block->escapeHtml($block->getBcContactNo()) ?></td>
+        </tr>
+        <tr>
+            <th><?= $block->escapeHtml(__('Parent Customer:')) ?></th>
+            <td>
+                <a href="<?= $this->getParentCustomerUrl()?>" target="_blank">
+                    <?= $block->escapeHtml($block->getParentCustomerEmail()) ?>
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
     <address>

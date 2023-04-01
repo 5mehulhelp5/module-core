@@ -20,4 +20,16 @@
             </argument>
         </arguments>
     </type>
+    <type name="Commerce365\Core\Service\Customer\ParentResolveCustomerSession">
+        <arguments>
+            <argument name="session" xsi:type="object">Magento\Framework\Session\Generic\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Commerce365\Core\Service\PrepareSalesRequestQuery">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">
+                Commerce365\Core\Service\Customer\ParentResolveCustomerSession\Proxy
+            </argument>
+        </arguments>
+    </type>
 </config>

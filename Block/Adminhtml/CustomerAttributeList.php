@@ -2,6 +2,8 @@
 
 namespace Commerce365\Core\Block\Adminhtml;
 
+use Commerce365\Core\Service\Customer\GetParentCustomer;
+use Magento\Backend\Model\Url;
 use Magento\Customer\Api\Data\CustomerInterface;
 use Magento\Customer\Api\Data\CustomerInterfaceFactory;
 use Magento\Framework\Api\DataObjectHelper;
@@ -11,17 +13,23 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
     private $customer;
     private CustomerInterfaceFactory $customerDataFactory;
     private DataObjectHelper $dataObjectHelper;
+    private GetParentCustomer $getParentCustomer;
+    private Url $urlBuilder;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
         CustomerInterfaceFactory $customerDataFactory,
         DataObjectHelper $dataObjectHelper,
+        GetParentCustomer $getParentCustomer,
+        Url $urlBuilder,
         array $data = []
     ) {
         $this->customerDataFactory = $customerDataFactory;
         $this->dataObjectHelper = $dataObjectHelper;
 
         parent::__construct($context, $data);
+        $this->getParentCustomer = $getParentCustomer;
+        $this->urlBuilder = $urlBuilder;
     }
 
     public function getCustomer()
@@ -53,16 +61,6 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
         $customer = $this->getCustomer();
         if ($customer->getCustomAttribute('bc_contact_no')) {
             return $customer->getCustomAttribute('bc_contact_no')->getValue();
-        }
-
-        return '';
-    }
-
-    public function getParentCustomerId()
-    {
-        $customer = $this->getCustomer();
-        if ($customer->getCustomAttribute('parent_customer_id')) {
-            return $customer->getCustomAttribute('parent_customer_id')->getValue();
         }
 
         return '';
@@ -179,5 +177,25 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
             default:
                 return "Unknown";
         }
+    }
+
+    public function getParentCustomerUrl()
+    {
+        $parent = $this->getParentCustomer->execute($this->getCustomer());
+        if (!$parent) {
+            return '';
+        }
+
+        return $this->urlBuilder->getUrl('*/*/edit', ['id' => $parent->getId()]);
+    }
+
+    public function getParentCustomerEmail()
+    {
+        $parent = $this->getParentCustomer->execute($this->getCustomer());
+        if (!$parent) {
+            return '';
+        }
+
+        return $parent->getEmail();
     }
 }
