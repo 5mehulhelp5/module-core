@@ -113,6 +113,8 @@ class AbstractList extends Template
      */
     protected function addSortingToQuery(array $query): array
     {
+        $query['sortColumn'] = 'Document Date';
+        $query['sortDirection'] = 'DESC';
         if ($this->getSortColumn() && $this->getSortDirection()) {
             $query['sortColumn'] = $this->getSortColumn();
             $query['sortDirection'] = $this->getSortDirection();
