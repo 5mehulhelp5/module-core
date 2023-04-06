@@ -2,14 +2,15 @@
 
 namespace Commerce365\Core\Block\Adminhtml\Edit\Tab;
 
+use Commerce365\Core\Block\Adminhtml\CustomerAttributeList;
 use Magento\Backend\Block\Widget\Form\Generic;
 use Magento\Customer\Controller\RegistryConstants;
+use Magento\Framework\Phrase;
 use Magento\Ui\Component\Layout\Tabs\TabInterface;
 
 class CustomerAttributes extends Generic implements TabInterface
 {
     protected $_coreRegistry;
-    protected $_systemStore;
 
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
@@ -19,7 +20,6 @@ class CustomerAttributes extends Generic implements TabInterface
         array $data = []
     ) {
         $this->_coreRegistry = $registry;
-        $this->_systemStore = $systemStore;
         parent::__construct($context, $registry, $formFactory, $data);
     }
 
@@ -30,24 +30,18 @@ class CustomerAttributes extends Generic implements TabInterface
     {
         return $this->_coreRegistry->registry(RegistryConstants::CURRENT_CUSTOMER_ID);
     }
-    /**
-     * @return \Magento\Framework\Phrase
-     */
-    public function getTabLabel()
+
+    public function getTabLabel(): Phrase
     {
         return __('Commerce 365 label');
     }
-    /**
-     * @return \Magento\Framework\Phrase
-     */
-    public function getTabTitle()
+
+    public function getTabTitle(): Phrase
     {
         return __('Commerce 365');
     }
-    /**
-     * @return bool
-     */
-    public function canShowTab()
+
+    public function canShowTab(): bool
     {
         if ($this->getCustomerId()) {
             return true;
@@ -58,7 +52,7 @@ class CustomerAttributes extends Generic implements TabInterface
     /**
      * @return bool
      */
-    public function isHidden()
+    public function isHidden(): bool
     {
         if ($this->getCustomerId()) {
             return false;
@@ -70,7 +64,7 @@ class CustomerAttributes extends Generic implements TabInterface
      *
      * @return string
      */
-    public function getTabClass()
+    public function getTabClass(): string
     {
         return '';
     }
@@ -81,9 +75,7 @@ class CustomerAttributes extends Generic implements TabInterface
      */
     public function getTabUrl()
     {
-        //replace the tab with the url you want
         return '';
-        //return $this->getUrl('test/*/test', ['_current' => true]);
     }
     /**
      * Tab should be loaded trough Ajax call
@@ -106,11 +98,9 @@ class CustomerAttributes extends Generic implements TabInterface
 
     public function getFormHtml()
     {
-        $html = $this->getLayout()
-          ->createBlock('Commerce365\Core\Block\Adminhtml\CustomerAttributeList')
+        return $this->getLayout()
+          ->createBlock(CustomerAttributeList::class)
           ->setTemplate('Commerce365_Core::tab/view/customer_attribute_list.phtml')
           ->toHtml();
-
-        return $html;
     }
 }
