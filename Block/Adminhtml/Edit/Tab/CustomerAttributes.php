@@ -16,7 +16,6 @@ class CustomerAttributes extends Generic implements TabInterface
         \Magento\Backend\Block\Template\Context $context,
         \Magento\Framework\Registry $registry,
         \Magento\Framework\Data\FormFactory $formFactory,
-        \Magento\Store\Model\System\Store $systemStore,
         array $data = []
     ) {
         $this->_coreRegistry = $registry;
