@@ -73,13 +73,15 @@ class ParentResolveCustomerSession extends Session
     {
         $customer = parent::getCustomer();
 
-        return $this->getParentCustomer->execute($customer);
+        return $this->getParentCustomer->execute($customer->getDataModel());
     }
 
-    public function getCustomerId()
+    public function getCustomerId(): ?string
     {
-        $customer = parent::getCustomer();
+        $customer = parent::getCustomerId();
 
-        return $this->getParentCustomer->execute($customer)->getId();
+        return $this->getParentCustomer->getByCustomerId($customer) ?
+            $this->getParentCustomer->getByCustomerId($customer)->getId() :
+            null;
     }
 }
