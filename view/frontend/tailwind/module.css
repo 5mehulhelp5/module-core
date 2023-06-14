@@ -1,0 +1,5 @@
+.search-form-fields {
+    display: flex;
+    width: 50%;
+    column-gap: 10px;
+}
