@@ -55,6 +55,14 @@
                 </field>
 
             </group>
+            <group id="version" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Version</label>
+                <group id="coreversion" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1"
+                       showInStore="0">
+                    <frontend_model>Commerce365CoreModuleVersionBlock</frontend_model>
+                    <label><![CDATA[Commerce365 Core Version]]></label>
+                </group>
+            </group>
         </section>
     </system>
 </config>

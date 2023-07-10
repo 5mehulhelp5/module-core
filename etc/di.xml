@@ -32,4 +32,14 @@
             </argument>
         </arguments>
     </type>
+    <virtualType name="Commerce365CoreModuleVersion" type="Commerce365\Core\Service\Module\Version">
+        <arguments>
+            <argument name="packageName" xsi:type="string">commerce365/module-core</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Commerce365CoreModuleVersionBlock" type="Commerce365\Core\Block\Adminhtml\Version">
+        <arguments>
+            <argument name="version" xsi:type="object">Commerce365CoreModuleVersion</argument>
+        </arguments>
+    </virtualType>
 </config>
