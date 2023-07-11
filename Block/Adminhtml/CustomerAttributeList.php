@@ -182,7 +182,7 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
     public function getParentCustomerUrl()
     {
         $parent = $this->getParentCustomer->execute($this->getCustomer());
-        if (!$parent) {
+        if ($parent->getId() === $this->getCustomer()->getId()) {
             return '';
         }
 
@@ -192,7 +192,7 @@ class CustomerAttributeList extends \Magento\Backend\Block\Template
     public function getParentCustomerEmail()
     {
         $parent = $this->getParentCustomer->execute($this->getCustomer());
-        if (!$parent) {
+        if ($parent->getId() === $this->getCustomer()->getId()) {
             return '';
         }
 
