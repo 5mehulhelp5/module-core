@@ -40,6 +40,8 @@ class AddCustomerCompanyAttributes implements DataPatchInterface
     {
         $this->createAttribute('bc_contact_no', 'BC Contact Number');
         $this->createAttribute('parent_customer_id', 'Parent Customer ID for Contacts');
+
+        return $this;
     }
 
     private function createAttribute($code, $label)

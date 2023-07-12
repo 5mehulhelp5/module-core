@@ -43,15 +43,4 @@ class Data extends AbstractHelper
     {
         $this->_logger->debug($message);
     }
-
-    public function getCustomerId()
-    {
-        if ($customerId = $this->customerSession->getCustomerId()) {
-            return $customerId;
-        }
-
-        if ($customerId = $this->httpContext->getValue(ContextPlugin::CUSTOMER_ID)) {
-            return $customerId;
-        }
-    }
 }
