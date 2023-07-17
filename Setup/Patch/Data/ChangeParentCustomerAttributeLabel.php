@@ -28,14 +28,12 @@ class ChangeParentCustomerAttributeLabel implements DataPatchInterface
 
     public function apply()
     {
-        $this->moduleDataSetup->startSetup();
-
         $this->moduleDataSetup->getConnection()->update(
             $this->moduleDataSetup->getTable('eav_attribute'),
             ['frontend_label' => 'Parent Customer'],
             ['attribute_code = ?' => 'parent_customer_id']
         );
 
-        $this->moduleDataSetup->endSetup();
+        return $this;
     }
 }
