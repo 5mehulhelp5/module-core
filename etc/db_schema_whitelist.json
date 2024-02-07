@@ -1,0 +1,7 @@
+{
+    "commerce365_oauth_token": {
+        "column": {
+            "token": true
+        }
+    }
+}

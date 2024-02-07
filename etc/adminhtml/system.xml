@@ -11,7 +11,7 @@
             <tab>Commerce365Config</tab>
             <resource>Commerce365_Core::config</resource>
             <group id="hub" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Commerce 365 Hub</label>
+                <label>Commerce 365 API</label>
                 <field id="hub_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Base URL</label>
                 </field>
@@ -49,6 +49,77 @@
                     <frontend_model>Commerce365CoreModuleVersionBlock</frontend_model>
                     <label><![CDATA[Commerce365 Core Version]]></label>
                 </group>
+            </group>
+        </section>
+        <section id="commerce365config_advanced" translate="label" sortOrder="510" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Advanced</label>
+            <tab>Commerce365Config</tab>
+            <resource>Commerce365_Core::config</resource>
+            <group id="bc_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Business Central Integration Configuration</label>
+                <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Enable Business Central Integration</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[This will be used only for B2B customer price features.]]></comment>
+                </field>
+                <field id="auth_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                    <label>Authentication Type</label>
+                    <source_model>Commerce365\Core\Model\Config\Source\AuthType</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="username" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Username</label>
+                    <depends>
+                        <field id="auth_type">base</field>
+                    </depends>
+                </field>
+                <field id="password" translate="label" type="password" sortOrder="16" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Password</label>
+                    <depends>
+                        <field id="auth_type">base</field>
+                    </depends>
+                </field>
+                <field id="tenant_id" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Azure Entry Id tenant Id</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                    </depends>
+                </field>
+                <field id="endpoint" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>OAuth Endpoint</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                    </depends>
+                </field>
+                <field id="client_id" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>OAuth Client Id</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                    </depends>
+                </field>
+                <field id="client_secret" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>OAuth Client Secret</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                    </depends>
+                </field>
+                <field id="company" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Company Name</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                    </depends>
+                </field>
+                <field id="check_connection" translate="label comment" type="button" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Commerce365\Core\Block\Adminhtml\System\Config\Buttons\BusinessCentral\OauthCheckConnection</frontend_model>
+                    <label><![CDATA[Test]]></label>
+                    <depends>
+                        <field id="loading">combined</field>
+                    </depends>
+                    <comment><![CDATA[Use this button to check the URL and credentials you have entered. Do not forget to save the configuration after a successful testing the connection.]]></comment>
+                </field>
             </group>
         </section>
     </system>
