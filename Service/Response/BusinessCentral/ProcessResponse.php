@@ -21,7 +21,12 @@ class ProcessResponse
      */
     public function execute($response)
     {
+        if (!$response) {
+            return [];
+        }
+
         $responseData = [];
+
         $status = $response->getStatusCode();
         if ($status >= 200 && $status < 300) {
             $responseData = $this->serializer->unserialize($response->getBody()->getContents());
