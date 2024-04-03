@@ -2,43 +2,38 @@
 
 namespace Commerce365\Core\Controller\Adminhtml\Connection;
 
+use Commerce365\Core\Model\MainConfig;
 use Commerce365\Core\Service\Request\Post;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
-use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Message\ManagerInterface;
 
 class Check extends Action
 {
     private Post $post;
+    private MainConfig $mainConfig;
 
     public function __construct(
         Post $post,
-        Context $context
+        Context $context,
+        MainConfig $mainConfig,
+        ManagerInterface $messageManager
     ) {
         parent::__construct($context);
         $this->post = $post;
+        $this->mainConfig = $mainConfig;
+        $this->messageManager = $messageManager;
     }
 
     public function execute()
     {
-        $apiUrl = $this->getRequest()->getParam('apiUrl');
-        $appId = $this->getRequest()->getParam('appId');
-        $secretKey = $this->getRequest()->getParam('secretKey');
-
-        $apiUrl = trim($apiUrl);
-        $appId = trim($appId);
-        $secretKey = trim($secretKey);
+        $apiUrl = $this->mainConfig->getHubUrl();
+        $appId = $this->mainConfig->getHubAppId();
+        $secretKey = $this->mainConfig->getHubSecretKey();
 
         if ($apiUrl === '' || $appId === '' || $secretKey === '') {
-            $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-            $resultJson->setData(
-                [
-                    'success' => false,
-                    'error_message' => 'First fill in all of the above fields!',
-                    'time' => time()
-                ]
-            );
-            return $resultJson;
+            $this->messageManager->addErrorMessage(__('First fill in all of the above fields!'));
+            return $this->resultRedirectFactory->create()->setUrl($this->_redirect->getRefererUrl());
         }
 
         try {
@@ -54,20 +49,21 @@ class Check extends Action
             $apiConnectionStatusCode = $body["bcApiStatusCode"] ?? 500;
             $statusMessage = $body["bcApiConnectionMessage"] ?? __('Unknown Error');
 
-            $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
             if ($apiConnectionStatusCode === 200) {
-                return $resultJson->setData(['success' => true, 'time' => time()]);
+                $this->messageManager->addSuccessMessage(__('Connected Successful'));
+                return $this->resultRedirectFactory->create()->setUrl($this->_redirect->getRefererUrl());
             }
 
-            return $resultJson->setData(['success' => false, 'error_message' => $statusMessage, 'time' => time()]);
+            $this->messageManager->addErrorMessage($statusMessage);
+            return $this->resultRedirectFactory->create()->setUrl($this->_redirect->getRefererUrl());
 
         } catch (\Exception $e) {
-            $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-            return $resultJson->setData(['success' => false, 'error_message' => $e->getMessage(), 'time' => time()]);
+            $this->messageManager->addErrorMessage($e->getMessage());
+            return $this->resultRedirectFactory->create()->setUrl($this->_redirect->getRefererUrl());
         }
     }
 
-    protected function _isAllowed()
+    protected function _isAllowed(): bool
     {
         return true;
     }

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="commerce365_oauth_token" resource="default" engine="innodb" comment="Commerce365 OAuth Table">
+        <column xsi:type="text" name="token"  nullable="false" comment="Token"/>
+    </table>
+</schema>
