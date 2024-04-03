@@ -4,14 +4,12 @@ namespace Commerce365\Core\Controller\Adminhtml\Connection;
 
 use Commerce365\Core\Model\AdvancedConfig;
 use Commerce365\Core\Service\Request\BusinessCentral\RefreshOAuthToken;
-use Commerce365\Core\Service\Request\Post;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Message\ManagerInterface;
 
 class OAuthCheck extends Action
 {
-    private Post $post;
     private AdvancedConfig $advancedConfig;
     private RefreshOAuthToken $refreshOAuthToken;
 

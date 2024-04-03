@@ -29,7 +29,7 @@ class OAuthPost
         $this->getOAuthToken = $getOAuthToken;
     }
 
-    public function execute($method, $postData = [], $take = 1): array
+    public function execute($method, $postData = []): array
     {
         $endpointUrl = $this->prepareUrl($method);
         if (!$endpointUrl) {
