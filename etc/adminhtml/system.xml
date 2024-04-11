@@ -92,9 +92,8 @@
                     </depends>
                 </field>
                 <field id="endpoint" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>OAuth Endpoint</label>
+                    <label>Webservice URL</label>
                     <depends>
-                        <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
@@ -115,7 +114,6 @@
                 <field id="company" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Company Name</label>
                     <depends>
-                        <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
@@ -123,6 +121,10 @@
                     <frontend_model>Commerce365\Core\Block\Adminhtml\System\Config\Buttons\BusinessCentral\OauthCheckConnection</frontend_model>
                     <label><![CDATA[Test]]></label>
                     <comment><![CDATA[Use this button to check the URL and credentials you have entered. Do not forget to save the configuration after a successful testing the connection.]]></comment>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                        <field id="enabled">1</field>
+                    </depends>
                 </field>
             </group>
         </section>

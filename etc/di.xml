@@ -23,4 +23,24 @@
             <argument name="version" xsi:type="object">Commerce365CoreModuleVersion</argument>
         </arguments>
     </virtualType>
+
+    <virtualType name="Commerce365Handler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/Commerce365.log</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Commerce365Logger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Commerce365Handler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Commerce365\Core\Service\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Commerce365Logger</argument>
+        </arguments>
+    </type>
 </config>

@@ -14,10 +14,10 @@ class AuthType implements OptionSourceInterface
     public function toOptionArray(): array
     {
         return [
-//            [
-//                'value' => self::AUTH_TYPE_BASIC,
-//                'label' => __('Basic')
-//            ],
+            [
+                'value' => self::AUTH_TYPE_BASIC,
+                'label' => __('Basic')
+            ],
             [
                 'value' => self::AUTH_TYPE_OAUTH,
                 'label' => __('OAuth')

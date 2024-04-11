@@ -16,6 +16,8 @@ class AdvancedConfig
     private const XML_PATH_CLIENT_SECRET = 'bc_config/client_secret';
     private const XML_PATH_COMPANY_NAME = 'bc_config/company';
     private const XML_PATH_ENDPOINT = 'bc_config/endpoint';
+    private const XML_PATH_USERNAME = 'bc_config/username';
+    private const XML_PATH_PASSWORD = 'bc_config/password';
 
     private ScopeConfigInterface $scopeConfig;
 
@@ -27,6 +29,12 @@ class AdvancedConfig
     public function isBCOAuth()
     {
         return $this->getConfigValue(self::XML_PATH_AUTH_TYPE, 'website') === AuthType::AUTH_TYPE_OAUTH
+            && $this->isSetConfigFlag(self::XML_PATH_ENABLED, 'website');
+    }
+
+    public function isBCBasic()
+    {
+        return $this->getConfigValue(self::XML_PATH_AUTH_TYPE, 'website') === AuthType::AUTH_TYPE_BASIC
             && $this->isSetConfigFlag(self::XML_PATH_ENABLED, 'website');
     }
 
@@ -64,5 +72,15 @@ class AdvancedConfig
     public function isSetConfigFlag($path, $scope)
     {
         return $this->scopeConfig->isSetFlag('commerce365config_advanced/' . $path, $scope);
+    }
+
+    public function getUsername()
+    {
+        return $this->getConfigValue(self::XML_PATH_USERNAME, 'website');
+    }
+
+    public function getPassword()
+    {
+        return $this->getConfigValue(self::XML_PATH_PASSWORD, 'website');
     }
 }
