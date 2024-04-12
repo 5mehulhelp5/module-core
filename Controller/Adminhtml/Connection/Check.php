@@ -42,8 +42,7 @@ class Check extends Action
                 ['json' => [
                     'AppId' => $appId,
                     'SecretKey' => $secretKey
-                ]],
-                $apiUrl
+                ]]
             );
 
             $apiConnectionStatusCode = $body["bcApiStatusCode"] ?? 500;

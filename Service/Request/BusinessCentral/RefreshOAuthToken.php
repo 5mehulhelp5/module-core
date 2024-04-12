@@ -24,6 +24,10 @@ class RefreshOAuthToken
         $this->saveOAuthToken = $saveOAuthToken;
     }
 
+    /**
+     * @throws GuzzleException
+     * @throws RuntimeException
+     */
     public function execute(): string
     {
         $response = $this->sendRequest();

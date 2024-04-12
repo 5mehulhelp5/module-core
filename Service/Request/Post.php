@@ -4,49 +4,36 @@ declare(strict_types=1);
 
 namespace Commerce365\Core\Service\Request;
 
-use Commerce365\Core\Model\MainConfig;
 use Commerce365\Core\Service\Response\ProcessResponse;
-use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
-class Post
+class Post implements PostInterface
 {
     private ProcessResponse $processResponse;
-    private MainConfig $mainConfig;
+    private GetClient $getClient;
 
     /**
-     * @param MainConfig $mainConfig
+     * @param GetClient $getClient
      * @param ProcessResponse $processResponse
      */
     public function __construct(
-        MainConfig $mainConfig,
+        GetClient $getClient,
         ProcessResponse $processResponse
     ) {
         $this->processResponse = $processResponse;
-        $this->mainConfig = $mainConfig;
+        $this->getClient = $getClient;
     }
 
-    public function execute($method, $postData = [], $apiUrl = null): array
+    /**
+     * @throws GuzzleException
+     */
+    public function execute($method, $postData = []): array
     {
-        $hubUrl = $apiUrl ?? $this->mainConfig->getHubUrl();
-        $hubAppId = $this->mainConfig->getHubAppId();
-        $hubSecretKey = $this->mainConfig->getHubSecretKey();
-        if (!$hubAppId || !$hubUrl || !$hubSecretKey) {
+        $client = $this->getClient->execute();
+
+        if (!$client) {
             return [];
         }
-
-        $hubUrl = rtrim($hubUrl, '/') . '/';
-
-        $client = new Client([
-            'base_uri' => $hubUrl . 'api/',
-            'verify' => false,
-            'allow_redirects' => true,
-            'http_errors' => false,
-            'headers' => [
-                'Accept' => 'application/json',
-                'appId' => $hubAppId,
-                'secretKey' => $hubSecretKey
-            ]
-        ]);
 
         $response = $client->post($method, $postData);
 
