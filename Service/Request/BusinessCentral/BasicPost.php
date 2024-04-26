@@ -70,7 +70,7 @@ class BasicPost implements PostInterface
         $endpoint = $this->advancedConfig->getEndpoint();
         $company = $this->advancedConfig->getCompany();
 
-        return rtrim($endpoint, '/') . '/BC/ODataV4/' . $method . '?company=' . rawurlencode($company);
+        return rtrim($endpoint, '/') . '/ODataV4/' . $method . '?company=' . rawurlencode($company);
     }
 
     private function processJsonParams(array $jsonData): array
