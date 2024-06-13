@@ -57,9 +57,9 @@
             <tab>Commerce365Config</tab>
             <resource>Commerce365_Core::config</resource>
             <group id="bc_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
-                <label>Business Central Integration Configuration</label>
+                <label>Business Central Web Services - Advanced Configuration</label>
                 <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="1">
-                    <label>Enable Business Central Integration</label>
+                    <label>Enable Direct BC Web Service Integration</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[This will be used only for B2B customer price features.]]></comment>
                 </field>
@@ -85,7 +85,14 @@
                     </depends>
                 </field>
                 <field id="tenant_id" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="0">
-                    <label>Azure Entry Id tenant Id</label>
+                    <label>Microsoft Entra Tenant ID</label>
+                    <depends>
+                        <field id="auth_type">oauth</field>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="environment" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Environment</label>
                     <depends>
                         <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>

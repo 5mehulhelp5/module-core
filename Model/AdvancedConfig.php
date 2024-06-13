@@ -10,6 +10,7 @@ use Magento\Framework\App\Config\ScopeConfigInterface;
 class AdvancedConfig
 {
     private const XML_PATH_TENANT_ID = 'bc_config/tenant_id';
+    private const XML_PATH_ENVIRONMENT = 'bc_config/environment';
     private const XML_PATH_CLIENT_ID = 'bc_config/client_id';
     private const XML_PATH_AUTH_TYPE = 'bc_config/auth_type';
     private const XML_PATH_ENABLED = 'bc_config/enabled';
@@ -41,6 +42,11 @@ class AdvancedConfig
     public function getTenantId()
     {
         return $this->getConfigValue(self::XML_PATH_TENANT_ID, 'website');
+    }
+
+    public function getEnvironment()
+    {
+        return $this->getConfigValue(self::XML_PATH_ENVIRONMENT, 'website');
     }
 
     public function getClientId()

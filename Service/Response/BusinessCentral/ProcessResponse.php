@@ -21,7 +21,7 @@ class ProcessResponse
      */
     public function execute($response)
     {
-        if (!$response) {
+        if (empty($response)) {
             return [];
         }
 
