@@ -9,6 +9,7 @@ use Commerce365\Core\Service\Logger;
 use Commerce365\Core\Service\Request\PostInterface;
 use Commerce365\Core\Service\Response\BusinessCentral\ProcessResponse;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\GuzzleException;
 
 class BasicPost implements PostInterface
@@ -16,20 +17,23 @@ class BasicPost implements PostInterface
     private ProcessResponse $processResponse;
     private AdvancedConfig $advancedConfig;
     private Logger $logger;
+    private GetBCEndpointUrl $getBCEndpointUrl;
 
     public function __construct(
         AdvancedConfig $advancedConfig,
         ProcessResponse $processResponse,
+        GetBCEndpointUrl $getBCEndpointUrl,
         Logger $logger
     ) {
         $this->processResponse = $processResponse;
         $this->advancedConfig = $advancedConfig;
         $this->logger = $logger;
+        $this->getBCEndpointUrl = $getBCEndpointUrl;
     }
 
     public function execute($method, $postData = []): array
     {
-        $endpointUrl = $this->prepareUrl($method);
+        $endpointUrl = $this->getBCEndpointUrl->execute($method);
         if (!$endpointUrl) {
             return [];
         }
@@ -42,7 +46,7 @@ class BasicPost implements PostInterface
 
         try {
             $response = $this->makeCall($endpointUrl, $postData);
-        } catch (GuzzleException $exception) {
+        } catch (GuzzleException|ClientException $exception) {
             $this->logger->error($exception->getMessage());
             return [];
         }
@@ -62,15 +66,12 @@ class BasicPost implements PostInterface
             ]
         ]);
 
-        return $client->post($endpointUrl, $postData);
-    }
-
-    private function prepareUrl(string $method): string
-    {
-        $endpoint = $this->advancedConfig->getEndpoint();
-        $company = $this->advancedConfig->getCompany();
-
-        return rtrim($endpoint, '/') . '/ODataV4/' . $method . '?company=' . rawurlencode($company);
+        try {
+            return $client->post($endpointUrl, $postData);
+        } catch (ClientException $exception) {
+            $this->logger->error($exception->getMessage());
+            return [];
+        }
     }
 
     private function processJsonParams(array $jsonData): array
