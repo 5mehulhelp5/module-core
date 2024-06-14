@@ -17,27 +17,18 @@ class GetBCEndpointUrl
 
     public function execute(string $method): string
     {
-        if ($this->advancedConfig->isBCOAuth()) {
-            return $this->getOAuthUrl($method);
-        }
-
-        $endpoint = $this->advancedConfig->getEndpoint();
-        $company = $this->advancedConfig->getCompany();
-
-        return rtrim($endpoint, '/') . '/ODataV4/' . $method . '?company=' . rawurlencode($company);
-    }
-
-    private function getOAuthUrl($method): string
-    {
-        $tenantId = $this->advancedConfig->getTenantId();
-        if (!$tenantId) {
-            return '';
-        }
-
         $endpoint = $this->advancedConfig->getEndpoint();
         $environment = $this->advancedConfig->getEnvironment();
         $company = $this->advancedConfig->getCompany();
 
-        return rtrim($endpoint, '/') . '/' . $tenantId . '/' . $environment . '/ODataV4/' . $method . '?company=' . rawurlencode($company);
+        if ($this->advancedConfig->isBCOAuth()) {
+            $tenantId = $this->advancedConfig->getTenantId();
+            if (!$tenantId) {
+                return '';
+            }
+            $endpoint = rtrim($endpoint, '/') . '/' . $tenantId;
+        }
+            
+        return rtrim($endpoint, '/') . '/' . $environment . '/ODataV4/' . $method . '?company=' . rawurlencode($company);
     }
 }
