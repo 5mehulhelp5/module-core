@@ -61,7 +61,7 @@
                 <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="1">
                     <label>Enable Direct BC Web Service Integration</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[This will be used only for B2B customer price features.]]></comment>
+                    <comment><![CDATA[Enable this functionality only in combination with the corresponding Business Central and Azure authentication configurations.]]></comment>
                 </field>
                 <field id="auth_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
                     <label>Authentication Type</label>
@@ -72,6 +72,7 @@
                 </field>
                 <field id="username" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Username</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="auth_type">base</field>
                         <field id="enabled">1</field>
@@ -79,6 +80,7 @@
                 </field>
                 <field id="password" translate="label" type="password" sortOrder="16" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Password</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="auth_type">base</field>
                         <field id="enabled">1</field>
@@ -86,6 +88,7 @@
                 </field>
                 <field id="tenant_id" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Microsoft Entra Tenant ID</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
@@ -93,19 +96,21 @@
                 </field>
                 <field id="environment" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Environment</label>
+                    <validate>required-entry</validate>
                     <depends>
-                        <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
                 <field id="endpoint" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Webservice URL</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
                 </field>
                 <field id="client_id" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>OAuth Client Id</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
@@ -113,6 +118,7 @@
                 </field>
                 <field id="client_secret" translate="label" type="password" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>OAuth Client Secret</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
@@ -120,6 +126,7 @@
                 </field>
                 <field id="company" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Company Name</label>
+                    <validate>required-entry</validate>
                     <depends>
                         <field id="enabled">1</field>
                     </depends>
@@ -127,7 +134,7 @@
                 <field id="check_connection" translate="label comment" type="button" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0">
                     <frontend_model>Commerce365\Core\Block\Adminhtml\System\Config\Buttons\BusinessCentral\OauthCheckConnection</frontend_model>
                     <label><![CDATA[Test]]></label>
-                    <comment><![CDATA[Use this button to check the URL and credentials you have entered. Do not forget to save the configuration after a successful testing the connection.]]></comment>
+                    <comment><![CDATA[Use this button to check the web service URL and credentials you have entered. Do not forget to save the configuration before testing the connection.]]></comment>
                     <depends>
                         <field id="auth_type">oauth</field>
                         <field id="enabled">1</field>
