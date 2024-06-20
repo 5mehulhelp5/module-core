@@ -9,12 +9,7 @@ use Magento\Framework\Exception\LocalizedException;
 
 class GetBCEndpointUrl
 {
-    private AdvancedConfig $advancedConfig;
-
-    public function __construct(AdvancedConfig $advancedConfig)
-    {
-        $this->advancedConfig = $advancedConfig;
-    }
+    public function __construct(private readonly AdvancedConfig $advancedConfig) {}
 
     public function execute(string $method): string
     {

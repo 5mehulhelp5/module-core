@@ -8,12 +8,7 @@ use Magento\Framework\App\ResourceConnection;
 
 class SaveOAuthToken
 {
-    private ResourceConnection $resourceConnection;
-
-    public function __construct(ResourceConnection $resourceConnection)
-    {
-        $this->resourceConnection = $resourceConnection;
-    }
+    public function __construct(private readonly ResourceConnection $resourceConnection) {}
 
     public function execute($token): void
     {

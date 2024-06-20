@@ -10,12 +10,7 @@ use Magento\Framework\Exception\NoSuchEntityException;
 
 class GetParentCustomer
 {
-    private CustomerRepositoryInterface $customerRepository;
-
-    public function __construct(CustomerRepositoryInterface $customerRepository)
-    {
-        $this->customerRepository = $customerRepository;
-    }
+    public function __construct(private readonly CustomerRepositoryInterface $customerRepository) {}
 
     public function execute(CustomerInterface $customer): CustomerInterface
     {
@@ -31,7 +26,7 @@ class GetParentCustomer
         }
     }
 
-    public function getByCustomerId($customerId)
+    public function getByCustomerId($customerId): ?CustomerInterface
     {
         try {
             $customer = $this->customerRepository->getById($customerId);

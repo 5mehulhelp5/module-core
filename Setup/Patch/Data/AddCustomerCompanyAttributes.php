@@ -12,19 +12,11 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 
 class AddCustomerCompanyAttributes implements DataPatchInterface
 {
-    private EavSetupFactory $setupFactory;
-    private ModuleDataSetupInterface $moduleDataSetup;
-    private Config $eavConfig;
-
     public function __construct(
-        EavSetupFactory $setupFactory,
-        ModuleDataSetupInterface $moduleDataSetup,
-        Config $eavConfig
-    ) {
-        $this->setupFactory = $setupFactory;
-        $this->moduleDataSetup = $moduleDataSetup;
-        $this->eavConfig = $eavConfig;
-    }
+        private readonly EavSetupFactory $setupFactory,
+        private readonly ModuleDataSetupInterface $moduleDataSetup,
+        private readonly Config $eavConfig
+    ) {}
 
     public function getAliases(): array
     {

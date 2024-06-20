@@ -8,14 +8,9 @@ use Magento\Framework\Event\ObserverInterface;
 
 class RegisterModuleForHyvaConfig implements ObserverInterface
 {
-    private $componentRegistrar;
+    public function __construct(private readonly ComponentRegistrar $componentRegistrar) {}
 
-    public function __construct(ComponentRegistrar $componentRegistrar)
-    {
-        $this->componentRegistrar = $componentRegistrar;
-    }
-
-    public function execute(Observer $event)
+    public function execute(Observer $event): void
     {
         $config = $event->getData('config');
         $extensions = $config->hasData('extensions') ? $config->getData('extensions') : [];

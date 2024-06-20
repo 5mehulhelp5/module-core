@@ -9,12 +9,7 @@ use GuzzleHttp\Client;
 
 class GetClient
 {
-    private MainConfig $mainConfig;
-
-    public function __construct(MainConfig $mainConfig)
-    {
-        $this->mainConfig = $mainConfig;
-    }
+    public function __construct(private readonly MainConfig $mainConfig) {}
 
     public function execute(): ?Client
     {

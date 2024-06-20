@@ -13,16 +13,11 @@ use Magento\Framework\Exception\RuntimeException;
 
 class RefreshOAuthToken
 {
-    private AdvancedConfig $advancedConfig;
-    private ProcessResponse $processResponse;
-    private SaveOAuthToken $saveOAuthToken;
-
-    public function __construct(AdvancedConfig $advancedConfig, ProcessResponse $processResponse, SaveOAuthToken $saveOAuthToken)
-    {
-        $this->advancedConfig = $advancedConfig;
-        $this->processResponse = $processResponse;
-        $this->saveOAuthToken = $saveOAuthToken;
-    }
+    public function __construct(
+        private readonly AdvancedConfig $advancedConfig,
+        private readonly ProcessResponse $processResponse,
+        private readonly SaveOAuthToken $saveOAuthToken
+    ) {}
 
     /**
      * @throws GuzzleException

@@ -56,14 +56,14 @@
             <label>Advanced</label>
             <tab>Commerce365Config</tab>
             <resource>Commerce365_Core::config</resource>
-            <group id="bc_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <group id="bc_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Business Central Web Services - Advanced Configuration</label>
-                <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="1">
+                <field id="enabled" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Enable Direct BC Web Service Integration</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Enable this functionality only in combination with the corresponding Business Central and Azure authentication configurations.]]></comment>
                 </field>
-                <field id="auth_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="1">
+                <field id="auth_type" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
                     <label>Authentication Type</label>
                     <source_model>Commerce365\Core\Model\Config\Source\AuthType</source_model>
                     <depends>
