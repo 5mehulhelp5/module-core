@@ -9,20 +9,10 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class Get
 {
-    private ProcessResponse $processResponse;
-    private GetClient $getClient;
-
-    /**
-     * @param GetClient $getClient
-     * @param ProcessResponse $processResponse
-     */
     public function __construct(
-        GetClient $getClient,
-        ProcessResponse $processResponse
-    ) {
-        $this->processResponse = $processResponse;
-        $this->getClient = $getClient;
-    }
+        private readonly GetClient $getClient,
+        private readonly ProcessResponse $processResponse
+    ) {}
 
     /**
      * @throws GuzzleException

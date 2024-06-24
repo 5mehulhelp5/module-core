@@ -9,12 +9,7 @@ use Magento\Framework\Setup\Patch\DataPatchInterface;
 
 class ChangeParentCustomerAttributeLabel implements DataPatchInterface
 {
-    private ModuleDataSetupInterface $moduleDataSetup;
-
-    public function __construct(ModuleDataSetupInterface $moduleDataSetup)
-    {
-        $this->moduleDataSetup = $moduleDataSetup;
-    }
+    public function __construct(private readonly ModuleDataSetupInterface $moduleDataSetup) {}
 
     public function getAliases(): array
     {

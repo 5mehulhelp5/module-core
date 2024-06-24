@@ -8,18 +8,13 @@ use Magento\Framework\App\ResourceConnection;
 
 class GetCustomerEmailById
 {
-    private ResourceConnection $resourceConnection;
-
-    public function __construct(ResourceConnection $resourceConnection)
-    {
-        $this->resourceConnection = $resourceConnection;
-    }
+    public function __construct(private readonly ResourceConnection $resourceConnection) {}
 
     /**
      * @param $customerId
      * @return string
      */
-    public function execute($customerId)
+    public function execute($customerId): string
     {
         $connection = $this->resourceConnection->getConnection();
         $tableName = $this->resourceConnection->getTableName('customer_entity');

@@ -13,12 +13,7 @@ class MainConfig
     private const XML_PATH_HUB_APPID = 'hub/hub_appid';
     private const XML_PATH_HUB_SECRETKEY = 'hub/hub_secretkey';
 
-    private ScopeConfigInterface $scopeConfig;
-
-    public function __construct(ScopeConfigInterface $scopeConfig)
-    {
-        $this->scopeConfig = $scopeConfig;
-    }
+    public function __construct(private readonly ScopeConfigInterface $scopeConfig) {}
 
     public function getIncludeNonWebOrders()
     {

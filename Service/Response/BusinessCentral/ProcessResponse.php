@@ -8,12 +8,7 @@ use Magento\Framework\Serialize\SerializerInterface;
 
 class ProcessResponse
 {
-    private SerializerInterface $serializer;
-
-    public function __construct(SerializerInterface $serializer)
-    {
-        $this->serializer = $serializer;
-    }
+    public function __construct(private readonly SerializerInterface $serializer) {}
 
     /**
      * @param $response

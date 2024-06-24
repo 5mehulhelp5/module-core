@@ -8,14 +8,9 @@ use Magento\Framework\App\ResourceConnection;
 
 class GetOAuthToken
 {
-    private ResourceConnection $resourceConnection;
+    public function __construct(private readonly ResourceConnection $resourceConnection) {}
 
-    public function __construct(ResourceConnection $resourceConnection)
-    {
-        $this->resourceConnection = $resourceConnection;
-    }
-
-    public function execute()
+    public function execute(): string
     {
         $connection = $this->resourceConnection->getConnection();
         $tableName = $this->resourceConnection->getTableName('commerce365_oauth_token');

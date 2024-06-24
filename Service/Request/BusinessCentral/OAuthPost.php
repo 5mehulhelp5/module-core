@@ -14,25 +14,13 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class OAuthPost implements PostInterface
 {
-    private ProcessResponse $processResponse;
-    private RefreshOAuthToken $refreshOAuthToken;
-    private GetOAuthToken $getOAuthToken;
-    private Logger $logger;
-    private GetBCEndpointUrl $getBCEndpointUrl;
-
     public function __construct(
-        ProcessResponse $processResponse,
-        RefreshOAuthToken $refreshOAuthToken,
-        GetOAuthToken $getOAuthToken,
-        GetBCEndpointUrl $getBCEndpointUrl,
-        Logger $logger
-    ) {
-        $this->processResponse = $processResponse;
-        $this->refreshOAuthToken = $refreshOAuthToken;
-        $this->getOAuthToken = $getOAuthToken;
-        $this->logger = $logger;
-        $this->getBCEndpointUrl = $getBCEndpointUrl;
-    }
+        private readonly ProcessResponse $processResponse,
+        private readonly RefreshOAuthToken $refreshOAuthToken,
+        private readonly GetOAuthToken $getOAuthToken,
+        private readonly GetBCEndpointUrl $getBCEndpointUrl,
+        private readonly Logger $logger
+    ) {}
 
     public function execute($method, $postData = []): array
     {

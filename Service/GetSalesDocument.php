@@ -8,18 +8,10 @@ use Commerce365\Core\Service\Request\Get;
 
 class GetSalesDocument
 {
-    private Get $get;
-    private PrepareSalesRequestQuery $prepareSalesRequestQuery;
-
-    /**
-     * @param Get $get
-     * @param PrepareSalesRequestQuery $prepareSalesRequestQuery
-     */
-    public function __construct(Get $get, PrepareSalesRequestQuery $prepareSalesRequestQuery)
-    {
-        $this->get = $get;
-        $this->prepareSalesRequestQuery = $prepareSalesRequestQuery;
-    }
+    public function __construct(
+        private readonly Get $get,
+        private readonly PrepareSalesRequestQuery $prepareSalesRequestQuery
+    ) {}
 
     public function execute(array $query)
     {

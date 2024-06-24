@@ -11,14 +11,10 @@ use Magento\Framework\ObjectManagerInterface;
 
 class GetFactory
 {
-    private ObjectManagerInterface $objectManager;
-    private AdvancedConfig $advancedConfig;
-
-    public function __construct(ObjectManagerInterface $objectManager, AdvancedConfig $advancedConfig)
-    {
-        $this->objectManager = $objectManager;
-        $this->advancedConfig = $advancedConfig;
-    }
+    public function __construct(
+        private readonly ObjectManagerInterface $objectManager,
+        private readonly AdvancedConfig $advancedConfig
+    ) {}
 
     public function create(): PostInterface
     {

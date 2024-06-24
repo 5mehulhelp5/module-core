@@ -14,22 +14,12 @@ use GuzzleHttp\Exception\GuzzleException;
 
 class BasicPost implements PostInterface
 {
-    private ProcessResponse $processResponse;
-    private AdvancedConfig $advancedConfig;
-    private Logger $logger;
-    private GetBCEndpointUrl $getBCEndpointUrl;
-
     public function __construct(
-        AdvancedConfig $advancedConfig,
-        ProcessResponse $processResponse,
-        GetBCEndpointUrl $getBCEndpointUrl,
-        Logger $logger
-    ) {
-        $this->processResponse = $processResponse;
-        $this->advancedConfig = $advancedConfig;
-        $this->logger = $logger;
-        $this->getBCEndpointUrl = $getBCEndpointUrl;
-    }
+        private readonly AdvancedConfig $advancedConfig,
+        private readonly ProcessResponse $processResponse,
+        private readonly GetBCEndpointUrl $getBCEndpointUrl,
+        private readonly Logger $logger
+    ) {}
 
     public function execute($method, $postData = []): array
     {

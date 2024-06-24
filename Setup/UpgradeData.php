@@ -11,12 +11,7 @@ use Magento\Framework\Setup\UpgradeDataInterface;
 
 class UpgradeData implements UpgradeDataInterface
 {
-    private CustomerSetupFactory $customerSetupFactory;
-
-    public function __construct(CustomerSetupFactory $customerSetupFactory)
-    {
-        $this->customerSetupFactory = $customerSetupFactory;
-    }
+    public function __construct(private readonly CustomerSetupFactory $customerSetupFactory) {}
 
     public function upgrade(ModuleDataSetupInterface $setup, ModuleContextInterface $context)
     {

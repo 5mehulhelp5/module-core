@@ -11,22 +11,18 @@ use Magento\Framework\ObjectManagerInterface;
 
 class PostFactory
 {
-    private ObjectManagerInterface $objectManager;
-    private AdvancedConfig $advancedConfig;
+    public function __construct(
+        private readonly ObjectManagerInterface $objectManager,
+        private readonly AdvancedConfig $advancedConfig
+    ) {}
 
-    public function __construct(ObjectManagerInterface $objectManager, AdvancedConfig $advancedConfig)
+    public function create($storeId): PostInterface
     {
-        $this->objectManager = $objectManager;
-        $this->advancedConfig = $advancedConfig;
-    }
-
-    public function create(): PostInterface
-    {
-        if ($this->advancedConfig->isBCOAuth()) {
+        if ($this->advancedConfig->isBCOAuth($storeId)) {
             return $this->objectManager->create(OAuthPost::class);
         }
 
-        if ($this->advancedConfig->isBCBasic()) {
+        if ($this->advancedConfig->isBCBasic($storeId)) {
             return $this->objectManager->create(BasicPost::class);
         }
 
