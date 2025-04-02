@@ -42,6 +42,21 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
             </group>
+            <group id="configurable_image" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Configurable Product Images</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Parent Images on Child Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="replace_existing" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Replace Child Images if Exist</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If set to No, child product images will be used when available</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
             <group id="version" translate="label" type="text" sortOrder="140" showInDefault="1" showInWebsite="0" showInStore="0">
                 <label>Version</label>
                 <group id="coreversion" translate="label" sortOrder="1" showInDefault="1" showInWebsite="1"
