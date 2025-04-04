@@ -12,6 +12,8 @@ class MainConfig
     private const XML_PATH_HUB_URL = 'hub/hub_url';
     private const XML_PATH_HUB_APPID = 'hub/hub_appid';
     private const XML_PATH_HUB_SECRETKEY = 'hub/hub_secretkey';
+    private const XML_PATH_CONFIGURABLE_IMAGE_ENABLED = 'configurable_image/enabled';
+    private const XML_PATH_CONFIGURABLE_IMAGE_REPLACE = 'configurable_image/replace_existing';
 
     public function __construct(private readonly ScopeConfigInterface $scopeConfig) {}
 
@@ -33,6 +35,16 @@ class MainConfig
     public function getHubSecretKey()
     {
         return $this->getConfigValue(self::XML_PATH_HUB_SECRETKEY, 'website');
+    }
+
+    public function isConfigurableImageEnabled()
+    {
+        return $this->getConfigValue(self::XML_PATH_CONFIGURABLE_IMAGE_ENABLED, 'website');
+    }
+
+    public function isConfigurableImageReplaceExisting()
+    {
+        return $this->getConfigValue(self::XML_PATH_CONFIGURABLE_IMAGE_REPLACE, 'website');
     }
 
     public function getConfigValue($path, $scope)
